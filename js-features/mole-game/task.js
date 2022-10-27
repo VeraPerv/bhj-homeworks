@@ -1,7 +1,6 @@
 //debugger;
 const element = document.querySelector('.hole-game');
 const elementArray = Array.from(element.children);
-console.log(elementArray);
 const win = document.getElementById('dead');
 const lostL = document.getElementById('lost');
 
@@ -77,3 +76,55 @@ HTML-разметка представляет 9 лунок (класс hole), �
 Чтобы не создавать для каждой лунки отдельную переменную, напишите функцию getHole( index ), которая по индексу будет возвращать нужный элемент. Обратите внимание, что идентификаторы лунок располагают для такого подхода. Пример реализации можно посмотреть в файле base.js.
 
 */
+// Первоначальный рабочий вариант
+/* for (let i = 0; i < elementArray.length; i++) {
+
+    elementArray[i].onclick = function () {
+        if (elementArray[i].onclick && elementArray[i].classList.contains('hole_has-mole')) {
+            win.textContent = Number(win.textContent) + 1;
+
+            if (win.textContent == 10) {
+                alert('Выигрыш');
+                win.textContent = 0;
+                lostL.textContent = 0;
+            }
+
+        } else if (elementArray[i].onclick) {
+            lostL.textContent = Number(lostL.textContent) + 1;
+
+            if (lostL.textContent == 5) {
+                alert('Проигрыш');
+                lostL.textContent = 0;
+                win.textContent = 0;
+            }
+        }
+    };
+}*/
+
+/*let winLostFunc = function (textWin, textLost) {
+    if (win.textContent == 10) {
+        alert(textWin);
+        win.textContent = 0;
+        lostL.textContent = 0;
+    } else if (win.textContent == 5) {
+        alert(textLost);
+        win.textContent = 0;
+        lostL.textContent = 0;
+    }
+   
+};
+
+for (let i = 0; i < elementArray.length; i++) {
+
+    elementArray[i].onclick = function () {
+        if (elementArray[i].onclick && elementArray[i].classList.contains('hole_has-mole')) {
+            win.textContent = Number(win.textContent) + 1;
+            winLostFunc('Выигрыш', 'Проигрыш');
+
+        } else if (elementArray[i].onclick) {
+            lostL.textContent = Number(lostL.textContent) + 1;
+            winLostFunc('Выигрыш', 'Проигрыш');
+         
+        }
+    };
+}*/
