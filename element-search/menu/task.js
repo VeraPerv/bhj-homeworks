@@ -1,4 +1,18 @@
-const menuLink = Array.from(document.querySelectorAll('.menu__link')); //ссылки
+const menuLink = Array.from(document.getElementsByClassName('menu__link'));
+console.log(menuLink);
+
+for (let i = 0; i < menuLink.length; i++) {
+    menuLink[i].addEventListener('click', function (event) {
+event.preventDefault();
+
+this.nextElementSibling.classList.toggle('menu_active');});}
+ 
+
+
+
+/* вопросы: почему событие надо зарегистрировать именно на menu__link, */
+
+/*const menuLink = Array.from(document.querySelectorAll('.menu__link')); //ссылки
 const menuSub = Array.from(document.querySelectorAll('.menu_sub')); //2подменю
 const menuItem = Array.from(document.querySelectorAll('.menu__item')); //все ли
 
@@ -7,7 +21,7 @@ for (let i = 0; i < menuLink.length; i++) {
         this.nextElementSibling.classList.toggle('menu_active');
         event.preventDefault();
     });
-}
+}*/
 
 
 

@@ -1,20 +1,39 @@
-const image = document.getElementById('cookie');
 const clickCounter = document.getElementById('clicker__counter');
+const clickCounter2 = document.getElementById('clicker__counter2');
+const image = document.getElementById('cookie');
 
 function changeSize() {
-    image.width = ++clickCounter.textContent % 2 ? 250 : 200;
+
+  image.width = ++clickCounter.textContent % 2 ? 250 : 200;
 }
 
 image.onclick = changeSize;
 
 
-/*Процесс реализации
+// СКОРОСТЬ КЛИКОВ
 
-Всё, что делает игра - увеличивает счётчик нажатий на печеньку.
+/*
+const cookie = document.getElementById('cookie');
+const clickerCounter = document.getElementById('clicker__counter');
+let currentData; // время на момент начала клика
+let speedOfClick; //скорость
+let quantityOfClickSecond; //сколько выходит кликов в секунду
+let avg = 0;
 
-Увеличивайте значение счётчика при каждом клике на печеньку
-Чередуйте уменьшение и увеличение печеньки при каждом клике (уменьшайте и увеличивайте значения width/height) */
+cookie.addEventListener('click', function() {
+  currentData = !+clickerCounter.textContent ? new Date() : currentData;
+
+  if (+clickerCounter.textContent) {
+    avg = clickerCounter.textContent / ((Date.now() - currentData) / 1000); // разница между кликами в сек.
+    console.log('Прошло сек. с начала кликов: ' + (Date.now() - currentData) / 1000);
+    console.log('среднее количествео кликов в секунду: ' + avg.toFixed(2));
+  }
+  clickerCounter.textContent++;
+  cookie.width = (cookie.width == 200) ? 185 : 200;
+});*/
+
 // ВАРИАНТ БЕЗ ТЕРНАРНОГО ОПЕРАТОРА
+
 /*function changeSize() {
     image.width = 250;
     clickCounter.textContent = Number(clickCounter.textContent) + 1;
