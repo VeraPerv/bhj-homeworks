@@ -1,7 +1,8 @@
 const arrowPrev = document.getElementsByClassName('slider__arrow_prev');
 const arrowNext = document.getElementsByClassName('slider__arrow_next');
 const sliderItems = document.getElementsByClassName('slider__item');
-const dots = document.getElementsByClassName('slider__dot');
+const dots = Array.from(document.getElementsByClassName('slider__dot'));
+console.log(dots);
 
 let index = 0;
 dots[index].classList.add('slider__dot_active');
@@ -40,18 +41,21 @@ arrowPrev[0].addEventListener('click', function () {
 });
 
 //index = 1;
-
-dots[0].addEventListener('click', function () {
-    this.classList.toggle('slider__dot_active');
-    if (this.classList.contains('slider__dot_active')) {
-        sliderItems[0].classList.add('slider__item_active');
-    } else {
-        sliderItems[1].classList.remove('slider__item_active');
-    }
-
+for (let i = 0; i < dots.length; i++) {
+    //sliderItems[i].classList.remove('slider__item_active');
+   // this.classList.remove('slider__dot_active');
+dots[i].addEventListener('click', function () {
+//debugger;
+if(!this.classList.contains('slider__dot_active')) {
+    this.classList.add('slider__dot_active');
+    sliderItems[i].classList.add('slider__item_active');
+}   
+    
+    
 });
-
-dots[1].addEventListener('click', function () {
+//this.classList.remove('slider__dot_active');
+}
+/*dots[1].addEventListener('click', function () {
 
     this.classList.toggle('slider__dot_active');
     if (this.classList.contains('slider__dot_active')) {
@@ -61,6 +65,7 @@ dots[1].addEventListener('click', function () {
         sliderItems[1].classList.remove('slider__item_active');
     }
 });
+
 
 dots[2].addEventListener('click', function () {
 
@@ -99,6 +104,4 @@ dots[4].addEventListener('click', function () {
     } else {
         sliderItems[4].classList.remove('slider__item_active');
     }
-});
-
-
+}); */
