@@ -1,19 +1,19 @@
 class Autocomplete {
-  constructor( container ) {
+  constructor(container) {
     this.container = container;
-    this.input = container.querySelector( '.autocomplete__input' );
-    this.searchInput = container.querySelector( '.autocomplete__search' );
-    this.list = container.querySelector( '.autocomplete__list' );
-    this.valueContainer = container.querySelector( '.autocomplete__value' );
-    this.valueElement = container.querySelector( '.autocomplete__text-content' );
+    this.input = container.querySelector('.autocomplete__input');
+    this.searchInput = container.querySelector('.autocomplete__search');
+    this.list = container.querySelector('.autocomplete__list');
+    this.valueContainer = container.querySelector('.autocomplete__value');
+    this.valueElement = container.querySelector('.autocomplete__text-content');
 
     this.registerEvents();
   }
 
   registerEvents() {
-    this.valueContainer.addEventListener( 'click', e => {
-      this.searchInput.classList.add( 'autocomplete__search_active' );
-      this.list.classList.add( 'autocomplete__list_active' );
+    this.valueContainer.addEventListener('click', e => {
+      this.searchInput.classList.add('autocomplete__search_active');
+      this.list.classList.add('autocomplete__list_active');
       this.searchInput.value = this.valueElement.textContent.trim();
       this.searchInput.focus();
 
@@ -21,16 +21,22 @@ class Autocomplete {
     });
 
 
-    this.searchInput.addEventListener( 'input', e => this.onSearch());
+    this.searchInput.addEventListener('input', e => this.onSearch());
 
-    this.list.addEventListener( 'click', e => {
-      const { target } = e;
-      if ( !target.matches( '.autocomplete__item' )) {
+    this.list.addEventListener('click', e => {
+      const {
+        target
+      } = e;
+      if (!target.matches('.autocomplete__item')) {
         return;
       }
 
-      const { textContent: text } = target,
-        { id: value, index } = target.dataset;
+      const {
+        textContent: text
+      } = target, {
+        id: value,
+        index
+      } = target.dataset;
 
       this.onSelect({
         index,
@@ -40,22 +46,22 @@ class Autocomplete {
     });
   }
 
-  onSelect( item ) {
+  onSelect(item) {
     this.input.selectedIndex = item.index;
     this.valueElement.textContent = item.text;
 
-    this.searchInput.classList.remove( 'autocomplete__search_active' );
-    this.list.classList.remove( 'autocomplete__list_active' );
+    this.searchInput.classList.remove('autocomplete__search_active');
+    this.list.classList.remove('autocomplete__list_active');
   }
 
   onSearch() {
-    const matches = this.getMatches( this.searchInput.value );
+    const matches = this.getMatches(this.searchInput.value);
 
-    this.renderMatches( matches );
+    this.renderMatches(matches);
   }
 
-  renderMatches( matches ) {
-    const html = matches.map( item => `
+  renderMatches(matches) {
+    const html = matches.map(item => `
     	<li>
         <span class="autocomplete__item"
         	data-index="${item.index}"
@@ -66,6 +72,32 @@ class Autocomplete {
 
     this.list.innerHTML = html.join('');
   }
+
+  getMatches(text) {
+    console.log(this.input.options[this.input.selectedIndex].text);
+
+    if (text.includes(this.input.options[this.input.selectedIndex].text)) {
+
+      text = [this.input.options[this.input.selectedIndex].text];
+
+
+    }
+
+    return [{
+        text: text.push(this.input.options[this.input.selectedIndex].text),
+        value: this.input.value,
+      },
+
+    ];
+
+  }
+}
+
+new Autocomplete(document.querySelector('.autocomplete'));
+
+/*Реализация представляет собой HTML-обёртку над тегом select:
+
+В существующей реализации необходимо доработать метод getMatches
 
   getMatches( text ) {
     /*
@@ -80,7 +112,7 @@ class Autocomplete {
         text: 'Содержимое <option>',
         value: 'Содержимое атрибута value'
       }
-    */
+    
     return [
       {
         text: 'Чубакка',
@@ -88,6 +120,15 @@ class Autocomplete {
       }
     ];
   }
-}
+В экземпляре класса Autocomplete имеется свойство input, которое указывет на тег select. Его необходимо использовать для обхода по всем опциям списка.
 
-new Autocomplete( document.querySelector( '.autocomplete' ));
+Подсказки (спойлеры)
+Используемые темы
+Свойство options тега select
+Метод includes
+Советы
+Для получения всех опций тега select достаточно обратиться к this.input.options
+
+Процесс реализации
+Допишите метод getMatches
+Получайте удовольствие :)*/
