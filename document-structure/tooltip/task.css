@@ -21,5 +21,5 @@
 }
 
 .tooltip_active {
-  display: block;
+  display: inline-block;/*поменяла block*/
 }
