@@ -1,30 +1,31 @@
 let inputField = document.getElementById('task__input'); //инпут
-let list = document.getElementById('tasks__list'); //див для списка
-let buttonIn = document.getElementById('tasks__add');
-let formIn = document.getElementById('tasks__form');
+console.log(inputField);
 
-buttonIn.addEventListener('click', function (event) {
+let buttonAdd = document.getElementById('tasks__add'); //кнопка
+let list = document.getElementById('tasks__list'); //список
+
+buttonAdd.addEventListener('click', function (event) {
 
   event.preventDefault();
 
-  if (inputField.value != '') {
 
-    list.insertAdjacentHTML('afterBegin', '<div class="task">  <div class="task__title">Сходить в магазин</div><a href="#" class="task__remove">&times;</a></div>');
-
-    let forSave = list.querySelector('.task__title');
-    forSave.textContent = inputField.value;
-    inputField.value = '';
-
-    let forRemove = list.querySelector('.task__remove');
-
-    forRemove.addEventListener('click', function (event) {
-      event.preventDefault();
-      list.querySelector('.task').remove();
-    });
+  if (inputField.value.trim() != '') {
+    list.insertAdjacentHTML('afterbegin', `<div class="task">
+  <div class="task__title">${inputField.value.trim()}
+  </div>
+  <a href="#" class="task__remove">&times;</a>
+</div>`);
   }
-});
+  inputField.value = '';
+  let forRemove = list.querySelectorAll('.task__remove');
 
-/*Правильно добавила логику для крестика? внутри и после добавления элемента */
+  forRemove.forEach((e) => e.addEventListener('click', function (event) {
+    event.preventDefault();
+    event.target.closest('.task').remove();
+  }));
+
+
+});
 
 
 
@@ -56,20 +57,3 @@ buttonIn.addEventListener('click', function (event) {
 Window.localStorage
 LocalStorage на пальцах
 */
-/*let inputField = document.getElementById('task__input');
-console.log(inputField);
-console.log(inputField.value);
-
- let list = document.getElementById('tasks__list');
- console.log(list);
- inputField.addEventListener('keydown', function(event){
-  debugger;
-      if(event.сode == 'Enter'){
-  
-        console.log(event.code);
-        list.insertAdjacentHTML('afterBegin','<div class="task"> <div class="task__title">Сходить в магазин</div><a href="#" class="task__remove">&times;</a> </div>');
-        let elementText = list.querySelector('.task__title');
-        console.log(elementText);
-        elementText.textContent = inputField.value;
-    }
- }); */

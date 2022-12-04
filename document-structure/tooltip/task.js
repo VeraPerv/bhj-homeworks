@@ -11,14 +11,17 @@ toolTips.forEach((element) => {
         if (forText) {
             forText.remove();
         }
-        element.insertAdjacentHTML('afterEnd', '<div class="tooltip" style= "left: event.clientX; top: event.clientY"> Проверка! </div> ');
+        element.insertAdjacentHTML('afterEnd', `<div class="tooltip" style= "left: event.clientX; top: event.clientY">${element.title}</div> `);
         forText = document.querySelector('div.tooltip');
-        forText.textContent = element.title;
         forText.classList.add('tooltip_active');
+        forText.addEventListener('click', function () {
+        forText.classList.remove('tooltip_active');
+        });
 
     });
 });
 
+/* В задании с подсказками при повторном клике на открытую подсказку у вас она не закрывается. Точней подсказка закрывается, но там же и открывается. Вам нужно закрывать подсказку при повторном клике.*/
 /* Необходимо написать всплывающую подсказку для элементов. Подсказка появляется после клика на элементе.
 
 
