@@ -1,4 +1,83 @@
 const robotWords = [
+  'не нравится  - не обращайтесь',
+  'везде хорошо, где вас нет',
+  'отлично все у них для вас',
+  'до вас у нас все хорошо было',
+  'идите',
+  'не надо спасибо',
+  'грубость - наш конек',
+  'никаких вам здрасьте',
+  'до свидания не  надо, только прощайте',
+  'закройте чат',
+  'давай ,до свидания'
+];
+const chatWidget = document.querySelector('.chat-widget');
+console.log(chatWidget);
+chatWidget.addEventListener('click', function () {
+  chatWidget.classList.add('chat-widget_active');
+});
+
+const chatMessages = document.getElementById('chat-widget__messages'); //родитель, добавляем к нему разметку
+console.log(chatMessages);
+
+document.addEventListener('keyup', function (event) {
+
+  const chatInput = document.getElementById('chat-widget__input'); //поле инпута
+
+  if (event.code == 'Enter' && chatInput.value != '') {
+    chatMessages.innerHTML += `<div class="message message_client">
+<div class="message__time">${new Date().toLocaleTimeString().slice(0,-3)}</div>
+<div class="message__text">${chatInput.value}</div>
+</div>`;
+
+    chatInput.value = "";
+
+    let index = Math.floor(Math.random() * robotWords.length);
+
+    chatMessages.innerHTML += ` <div class="message">
+<div class="message__time">${new Date().toLocaleTimeString().slice(0,-3)}</div>
+<div class="message__text">${robotWords[index]}</div>
+</div>`;
+
+  }
+
+});
+
+
+
+
+/*const chatWidget = document.querySelector('.chat-widget');
+let logElem = document.querySelector(".chat-widget__messages");
+chatWidget.addEventListener('click', function () {
+  this.classList.add('chat-widget_active');
+
+});
+
+document.addEventListener('keyup', function (event) {
+  const clientMessage = document.querySelector('.message_client');
+
+  const chatInput = document.getElementById('chat-widget__input');
+
+
+  if (event.code == 'Enter' && chatInput.value != '') {
+      clientMessage.classList.add('message_client');
+      let timeT = clientMessage.querySelector('.message__time');
+      timeT = new Date();
+      let timeStr = timeT.toLocaleTimeString();
+      logElem.innerHTML += timeStr + ": " + chatInput.value + "<br/>";
+      chatInput.value = "";
+      let index = Math.floor(Math.random() * robotWords.length);
+      logElem.innerHTML += timeStr + ": " + robotWords[index] + "<br/>";
+
+  }
+
+});*/
+
+
+
+
+
+/*const robotWords = [
     'не нравится  - не обращайтесь',
     'везде хорошо, где вас нет',
     'отлично все у них для вас',
@@ -19,25 +98,50 @@ chatWidget.addEventListener('click', function () {
 
 });
 
+const chatInput = document.getElementById('chat-widget__input');//инпут
 document.addEventListener('keyup', function (event) {
-    const clientMessage = document.querySelector('.message_client');
+  debugger;
 
-    const chatInput = document.getElementById('chat-widget__input');
+if (event.code == 'Enter' && chatInput.value != '') {
+
+ 
+  logElem.insertAdjacentHTML('afterbegin', '<div class="message"><div class="message__time">22:10</div><div class="message__text">Добрый день!</div></div><!-- <div class="message message_client"><div class="message__time">22:10</div><div class="message__text">Добрый день!</div></div>');
+    
+
+const clientMessage = document.querySelector('.message_client');//внешн див клиента
+console.log(clientMessage);
+
+let clientTime = clientMessage.querySelector('.message__time');
+
+clientTime = new Date().toLocaleTimeString();//время клиента
+console.log(clientTime);
 
 
-    if (event.code == 'Enter' && chatInput.value != '') {
-        clientMessage.classList.add('message_client');
-        let timeT = clientMessage.querySelector('.message__time');
-        timeT = new Date();
+
+
+let clientText = clientMessage.querySelector('.message__text');//текст клиента
+clientText.innerHTML += chatInput.value + " " + clientTime;
+
+
+
+let robotMessage = chatWidget.querySelector('div.message');
+let robotTime = robotMessage.querySelector('.message__time');
+let robotText = robotMessage.querySelector('.message__text');
+
+
+       
+        
+      
+       /* timeT = new Date();
         let timeStr = timeT.toLocaleTimeString();
         logElem.innerHTML += timeStr + ": " + chatInput.value + "<br/>";
         chatInput.value = "";
         let index = Math.floor(Math.random() * robotWords.length);
-        logElem.innerHTML += timeStr + ": " + robotWords[index] + "<br/>";
+        logElem.innerHTML += timeStr + ": " + robotWords[index] + "<br/>";*/
 
-    }
+/*    }
 
-});
+});*/
 
 
 
@@ -146,3 +250,46 @@ MDN: Element.innerHTML
      </div>
    </div>
  `;*/
+
+/* const robotWords = [
+    'не нравится  - не обращайтесь',
+    'везде хорошо, где вас нет',
+    'отлично все у них для вас',
+    'до вас у нас все хорошо было',
+    'идите',
+    'не надо спасибо',
+    'грубость - наш конек',
+    'никаких вам здрасьте',
+    'до свидания не  надо, только прощайте',
+    'закройте чат',
+    'давай ,до свидания'
+];
+
+const chatWidget = document.querySelector('.chat-widget');
+let logElem = document.querySelector(".chat-widget__messages");
+chatWidget.addEventListener('click', function () {
+    this.classList.add('chat-widget_active');
+
+});
+
+document.addEventListener('keyup', function (event) {
+    const clientMessage = document.querySelector('.message_client');
+
+    const chatInput = document.getElementById('chat-widget__input');
+
+
+    if (event.code == 'Enter' && chatInput.value != '') {
+        clientMessage.classList.add('message_client');
+        let timeT = clientMessage.querySelector('.message__time');
+        timeT = new Date();
+        let timeStr = timeT.toLocaleTimeString();
+        logElem.innerHTML += timeStr + ": " + chatInput.value + "<br/>";
+        chatInput.value = "";
+        let index = Math.floor(Math.random() * robotWords.length);
+        logElem.innerHTML += timeStr + ": " + robotWords[index] + "<br/>";
+
+    }
+
+});
+
+*/
