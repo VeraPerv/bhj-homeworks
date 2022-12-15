@@ -1,4 +1,54 @@
 const form = document.getElementById('signin__form');
+const buttonIn = document.getElementById('signin__btn');
+const welcome = document.getElementById('welcome');
+const spanWelcome = document.getElementById('user_id');
+const signin = document.getElementById('signin');
+const inputFields = document.querySelectorAll('.control');
+
+window.addEventListener('load', function () {
+    if (localStorage.spanWelcome) {
+        signin.classList.remove('signin_active');
+        welcome.classList.add('welcome_active');
+        spanWelcome.textContent = localStorage.spanWelcome;
+    }
+});
+
+form.addEventListener('submit', function (event) {
+
+    event.preventDefault();
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener('readystatechange', function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            let text = JSON.parse(xhr.responseText);
+            console.log(text);
+            if (text.success === true) {
+                localStorage.setItem('id', JSON.stringify(text.user_id));
+                let forId = localStorage.getItem('id');
+                spanWelcome.textContent = forId;
+                signin.classList.remove('signin_active');
+                welcome.classList.add('welcome_active');
+
+            } else {
+
+                alert('неверный логин/пароль');
+                localStorage.removeItem('text');
+                inputFields.forEach((e) => e.value = ''); //очищаю поле ввода
+            }
+        }
+    });
+    let formData = new FormData(form);
+    xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/auth');
+    xhr.send(formData);
+
+});
+
+
+
+
+
+
+
+/*const form = document.getElementById('signin__form');
 let inputFields = [...document.querySelectorAll('.control')]; //инпуты
 console.log(inputFields);
 const welcome = document.getElementById('welcome');
@@ -40,7 +90,7 @@ btn.addEventListener('click', () => {
         console.log(e.value); //demo           
     });
     localStorage.setItem('key', JSON.stringify(arrOfInputFieldsValue));
-});
+});*/
 
 
 
